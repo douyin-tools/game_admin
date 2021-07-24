@@ -1,0 +1,303 @@
+[
+  {
+    "title": "控制台",
+    "href": "pages/console.html",
+    "fontFamily": "ok-icon",
+    "icon": "&#xe654;",
+    "spread": true,
+    "isCheck": true
+  },
+  {
+    "title": "系统管理",
+    "href": "",
+    "icon": "&#xe66f;",
+    "spread": false,
+    "children": [
+      {
+        "title": "系统设置",
+        "href": "System.setting",
+        "fontFamily": "layui-icon",
+        "icon": "&#xe62e;",
+        "spread": false
+      },
+      {
+        "title": "彩种管理",
+        "href": "Caipiao.cptype",
+        "icon": "&#xe62e;",
+        "spread": false
+      },
+      {
+        "title": "玩法管理",
+        "href": "Caipiao.wanfa",
+        "icon": "&#xe62e;",
+        "spread": false
+      },
+	  {
+        "title": "开奖管理",
+        "href": "Caipiao.kaijiang",
+        "icon": "&#xe62e;",
+        "spread": false
+      },
+	  {
+        "title": "设置开奖",
+        "href": "Caipiao.yukaijiang",
+        "icon": "&#xe62e;",
+        "spread": false
+      },
+	  {
+        "title": "彩票注单",
+        "href": "Game.manage",
+        "icon": "&#xe62e;",
+        "spread": false
+      },
+      {
+        "title": "游戏注单",
+        "href": "Game.betorders",
+        "icon": "&#xe62e;",
+        "spread": false
+      },
+	  {
+        "title": "注单异常检测",
+        "href": "Game.checkerrorder",
+        "icon": "&#xe62e;",
+        "spread": false
+      },
+      {
+        "title": "游戏维护设置",
+        "href": "Game.maintain",
+        "icon": "&#xe62e;",
+        "spread": false
+      },
+      {
+        "title": "客户端管理",
+        "href": "Game.client",
+        "icon": "&#xe62e;",
+        "spread": false
+      }
+    ]
+  },
+  {
+    "title": "数据统计",
+    "href": "",
+    "icon": "&#xe62c;",
+    "spread": false,
+    "children": [
+      {
+        "title": "统计概况",
+        "href": "Tongji.gaikuang",
+        "icon": "&#xe882;",
+        "spread": false
+      },
+      {
+        "title": "盈亏统计",
+        "href": "Tongji.yingkui",
+        "icon": "ok-icon-shuju1",
+        "spread": false
+      },
+	  {
+        "title": "用户统计",
+        "href": "Tongji.user",
+        "icon": "ok-icon-shuju1",
+        "spread": false
+      },
+	  {
+        "title": "团队概况",
+        "href": "Tongji.tdgaikuang",
+        "icon": "ok-icon-shuju1",
+        "spread": false
+      },
+	  {
+        "title": "充提款统计",
+        "href": "Tongji.chongti3d",
+        "icon": "ok-icon-shuju1",
+        "spread": false
+      }
+    ]
+  },
+  {
+    "title": "资金管理",
+    "href": "",
+    "icon": "&#xe705;",
+    "spread": false,
+    "children": [
+      {
+        "title": "提款银行",
+        "href": "Sysbank.manage",
+        "icon": "&#xe62e;",
+        "spread": false
+      },
+      {
+        "title": "存款方式",
+        "href": "Member.payset",
+        "icon": "&#xe62e;",
+        "spread": false
+      },
+      {
+        "title": "充值记录",
+        "href": "Member.recharge",
+        "icon": "&#xe62e;",
+        "spread": false
+      },
+      {
+        "title": "提现记录",
+        "href": "Member.withdraw",
+        "icon": "&#xe62e;",
+        "spread": false
+      },
+      {
+        "title": "代理佣金",
+        "href": "Member.commission",
+        "icon": "&#xe62e;",
+        "spread": false
+      },
+      {
+        "title": "系统配置",
+        "href": "Setting.index",
+        "icon": "&#xe62e;",
+        "spread": false
+      },
+      {
+        "title": "代理结算",
+        "href": "Setting.index",
+        "icon": "&#xe62e;",
+        "spread": false
+      }
+    ]
+  },
+  {
+    "title": "会员管理",
+    "href": "",
+    "fontFamily": "ok-icon",
+    "icon": "&#xe68a;",
+    "spread": false,
+    "children": [
+      {
+        "title": "会员组",
+        "href": "Membergroup.manage",
+        "icon": "&#xe62e;",
+        "spread": false
+      },
+      {
+        "title": "会员列表",
+        "href": "Member.manage",
+        "icon": "&#xe62e;",
+        "spread": false
+      },
+      {
+        "title": "同IP会员检测",
+        "href": "Member.sameipuser",
+        "icon": "&#xe62e;",
+        "spread": false
+      },
+      {
+        "title": "账变记录",
+        "href": "Member.fuddetail",
+        "icon": "&#xe609;",
+        "spread": false,
+        "target": "false"
+      },
+      {
+        "title": "会员返水记录",
+        "href": "Member.waterlog",
+        "icon": "&#xe609;",
+        "spread": false,
+        "target": "false"
+      },
+      {
+        "title": "站内信通知",
+        "href": "Member.message",
+        "icon": "&#xe609;",
+        "spread": false,
+        "target": "false"
+      },
+      {
+        "title": "银行信息",
+        "href": "Member.banklist",
+        "icon": "&#xe61c;",
+        "spread": false
+      },
+      {
+        "title": "登录日志",
+        "href": "Member.memlog",
+        "icon": "&#xe61c;",
+        "spread": false
+      }
+    ]
+  },
+  {
+    "title": "管理员管理",
+    "href": "",
+    "icon": "&#xe62d;",
+    "spread": false,
+    "children": [
+      {
+        "title": "管理员组",
+        "href": "Admingroup.manage",
+        "icon": "&#xe62e;",
+        "spread": false
+      },
+      {
+        "title": "管理员列表",
+        "href": "Adminmember.manage",
+        "icon": "&#xe62e;",
+        "spread": false
+      },
+	  {
+        "title": "管理员日志",
+        "href": "Adminmember.memlog",
+        "icon": "&#xe62e;",
+        "spread": false
+      }
+    ]
+  },
+  {
+    "title": "活动管理",
+    "fontFamily": "ok-icon",
+    "icon": "&#xe7a7;",
+    "spread": false,
+    "children": [
+      {
+        "title": "赠送活动",
+        "href": "System.zengsong",
+        "icon": "&#xe62e;",
+        "spread": false
+      },
+      {
+        "title": "每日加奖",
+        "href": "Member.fanshui",
+        "icon": "&#xe62e;",
+        "spread": false
+      },
+	  {
+        "title": "晋级奖励",
+        "href": "Member.jinjijiangli",
+        "icon": "&#xe62e;",
+        "spread": false
+      },
+	  {
+        "title": "代理佣金",
+        "href": "Member.dailiyongjin",
+        "icon": "&#xe62e;",
+        "spread": false
+      }
+    ]
+  },
+  {
+    "title": "内容管理",
+    "icon": "&#xe674;",
+    "children": [
+      {
+        "title": "资讯栏目管理",
+        "href": "News.category"
+      },
+      {
+        "title": "新闻资讯管理",
+        "href": "News.manage"
+      },
+      {
+        "title": "网站公告管理",
+        "href": "News.gonggao"
+      }
+    ]
+  }
+]

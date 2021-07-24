@@ -1,0 +1,1 @@
+{"title":"\u516d\u81f3\u5341\u540d-\u7b2c\u5341\u540d-\u53f7\u780110","typeid":"pk10","maxjj":"","minjj":"","maxrate":"9.900","minrate":"9.900","rate":"9.900","maxzs":"10","minxf":"1.00","maxxf":1000000,"totalzs":"10","maxprize":"3000000.00"}
