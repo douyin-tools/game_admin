@@ -58,7 +58,9 @@
                     $('#' + res[i].platform + '_qr_code').attr('src', res[i].qr_code);
                     $('#' + res[i].platform + '_updated_at').text(res[i].updated_at);
                     $('#' + res[i].platform + '_state').text(res[i].state);
-                    $('#' + res[i].platform + '_download_link').text(res[i].download_link);
+                    if ($('#' + res[i].platform + '_download_link').text() != res[i].download_link) {
+                        $('#' + res[i].platform + '_download_link').text(res[i].download_link);
+                    }
                 }
             }
         })
