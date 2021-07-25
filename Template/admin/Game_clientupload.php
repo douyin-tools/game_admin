@@ -45,7 +45,7 @@
 </div>
 </body>
 <!--<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>-->
-<script type="text/javascript" src="../../plugins/jquery-1.4.4.min.js"></script>
+<script type="text/javascript" src="../admin/resources/ui/lib/jquery/1.9.1/jquery.min.js"></script>
 <script src="https://www.layuicdn.com/layui/layui.js" type="text/javascript"></script>
 <script>
     $(function() {
