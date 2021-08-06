@@ -174,13 +174,13 @@
 
 					</div>
 				</div>
-				<div class="row cl">
-					<label class="form-label col-xs-4 col-sm-2">绑定银行卡：</label>
-					<div class="formControls col-xs-8 col-sm-9">
-最多数量：<input type="text" class="input-text" name="info[sysBankMaxNum]" value="{$setlist.sysBankMaxNum}" style="width:60px;">张&nbsp;&nbsp;
-                        
-					</div>
-				</div>
+<!--				<div class="row cl">-->
+<!--					<label class="form-label col-xs-4 col-sm-2">绑定银行卡：</label>-->
+<!--					<div class="formControls col-xs-8 col-sm-9">-->
+<!--最多数量：<input type="text" class="input-text" name="info[sysBankMaxNum]" value="{$setlist.sysBankMaxNum}" style="width:60px;">张&nbsp;&nbsp;-->
+<!--                        -->
+<!--					</div>-->
+<!--				</div>-->
                 
 				<!--
                 <div class="row cl">
