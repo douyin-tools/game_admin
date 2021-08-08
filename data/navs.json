@@ -73,6 +73,12 @@
         "href": "Game.client",
         "icon": "&#xe62e;",
         "spread": false
+      },
+      {
+        "title": "后台IP白名单",
+        "href": "Adminmember.iplimit",
+        "icon": "&#xe62e;",
+        "spread": false
       }
     ]
   },
