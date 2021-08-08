@@ -242,4 +242,59 @@ class AdminmemberController extends CommonController {
 		parent::_deletealldo();
 	}
 
+    /**
+     * 后台ip白名单
+     * @return bool|void
+     */
+	public function iplimit()
+    {
+        if (IS_POST) {
+            $action = I('post.action');
+            if ($action == 'add') {
+                $ip = I('post.ip');
+                if (empty($ip)) {
+                    $this->error('请输入IP/IP段');
+                }
+                $remarks = I('post.remarks');
+                if (empty($ip)) {
+                    $this->error('请输入备注');
+                }
+                $isExist = M('admin_ip_limit')->where(['ip' => $ip])->find();
+                if ($isExist) {
+                    $this->error('此IP/IP段已存在');
+                }
+                $data = [
+                    'ip' => $ip,
+                    'remarks' => $remarks,
+                    'created_at' => date('Y-m-d H:i:s', time())
+                ];
+                $res = M('admin_ip_limit')->data($data)->add();
+                if (!$res) {
+                    $this->error('保存失败');
+                }
+                $this->success('保存成功');
+            } elseif ($action == 'del') {
+                $id = I('post.id');
+                if (!$id) {
+                    $this->error('参数错误');
+                }
+                $res = M('admin_ip_limit')->where(['id' => $id])->delete();
+                if (!$res) {
+                    $this->error('删除失败');
+                }
+                $this->success('删除成功');
+            }
+        }
+        $this->_db  = M('admin_ip_limit');
+        $_pagasize  = 50;
+        $count      = $this->_db->count();
+        $Page       = new \Think\Page($count,$_pagasize);
+        $show       = $Page->show();
+        $list       = $this->_db->limit($Page->firstRow.','.$Page->listRows)->order('id desc')->select();
+        $this->assign('totalcount',$count);
+        $this->assign('list',$list);
+        $this->assign('page',$show);
+        $this->display();
+    }
+
 }
