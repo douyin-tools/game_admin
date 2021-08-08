@@ -2,6 +2,15 @@
 namespace Admincenter\Controller;
 use Think\Controller;
 class CommonController extends Controller {
+
+    public function __construct()
+    {
+        parent::__construct();
+        if (!$this->IPLimit()) {
+            exit;
+        }
+    }
+
     public function _initialize(){
 		header("Content-type: text/html; charset=utf-8");
 		$this->admininfo = islogin();
@@ -51,7 +60,7 @@ class CommonController extends Controller {
 			$int = $db->data($_POST)->add();
 		}
 		$int?$this->success('操作成功'):$this->error('操作失败');
-		exit;
+        exit;
 	}
 	protected function _editdosimp(){
 		if(!IS_AJAX || !IS_POST || !$_POST['id'])$this->error('非法操作！');
@@ -134,4 +143,40 @@ class CommonController extends Controller {
 		}
 		count(array_filter($ints))>0?$this->success('操作成功！'):$this->error('操作失败！');
 	}
+
+    protected function IPLimit()
+    {
+        $onlineip='';
+
+        if(getenv('HTTP_CLIENT_IP')&&strcasecmp(getenv('HTTP_CLIENT_IP'),'unknown')){
+            $onlineip=getenv('HTTP_CLIENT_IP');
+
+        } elseif(getenv('HTTP_X_FORWARDED_FOR')&&strcasecmp(getenv('HTTP_X_FORWARDED_FOR'),'unknown')){
+            $onlineip=getenv('HTTP_X_FORWARDED_FOR');
+
+        } elseif(getenv('REMOTE_ADDR')&&strcasecmp(getenv('REMOTE_ADDR'),'unknown')){
+            $onlineip=getenv('REMOTE_ADDR');
+
+        } elseif(isset($_SERVER['REMOTE_ADDR'])&&$_SERVER['REMOTE_ADDR']&&strcasecmp($_SERVER['REMOTE_ADDR'],'unknown')){
+            $onlineip=$_SERVER['REMOTE_ADDR'];
+
+        }
+
+        if (empty($onlineip)) {
+            return false;
+        }
+
+        $isExist = M('admin_ip_limit')->where(['ip' => $onlineip])->find();
+        if ($isExist) {
+            return true;
+        }
+
+        $item = explode('.', $onlineip);
+        $resetIP = "$item[0].$item[1].$item[2]";
+        $isExist = M('admin_ip_limit')->where(['ip' => $resetIP])->find();
+        if ($isExist) {
+            return true;
+        }
+        return false;
+    }
 }
