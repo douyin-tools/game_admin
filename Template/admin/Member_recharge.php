@@ -51,7 +51,8 @@ $_states = [
 				<th width="60">实际手续费</th>
 				<th width="70">变更前金额</th>
 				<th width="70">变更后金额</th>-->
-				<th width="70">备注</th>
+                <th width="60">未洗码量</th>
+                <th width="70">备注</th>
 				<!--<th width="70">操作人</th>-->
 				<th width="60">类型</th>
 				<th width="60">时间</th>
@@ -79,6 +80,11 @@ $_states = [
                 <td>{$vo.actualfee}</td>
                 <td>{$vo.oldaccountmoney}</td>
                 <td>{$vo.newaccountmoney}</td>-->
+                <td><?php if ($vo['state'] != 1) {
+                    echo '-';
+                    } else {
+                    echo $vo['amount']*2 - $vo['dama_amount'] == 0 ? '完成洗码' : $vo['amount']*2 - $vo['dama_amount'];
+                    }?></td>
                 <td>{$vo.remark}</td>
               <!--  <td>{$vo.stateadmin}</td>-->
                 <td>{if condition="$vo['isauto'] eq 1"}自动{elseif condition="$vo['state'] eq 2"/}手动{/if}</td>
