@@ -440,6 +440,20 @@
                         <input type="text" name="info[f_recharge_rate]" class="input-text" value="{$setlist.f_recharge_rate|0}" style="width:80px;">&nbsp;0为不赠送
                     </div>
                 </div>
+
+                <div class="row cl">
+                    <label class="form-label col-xs-4 col-sm-2">下注金额告警阈值：</label>
+                    <div class="formControls col-xs-8 col-sm-9">
+                        <input type="text" name="info[bet_amount_warning]" class="input-text" value="{$setlist.bet_amount_warning|0}" style="width:80px;">&nbsp;0为关闭此告警
+                    </div>
+                </div>
+
+                <div class="row cl">
+                    <label class="form-label col-xs-4 col-sm-2">上分金额告警阈值：</label>
+                    <div class="formControls col-xs-8 col-sm-9">
+                        <input type="text" name="info[ob_balance_add]" class="input-text" value="{$setlist.ob_balance_add|0}" style="width:80px;">&nbsp;0为关闭此告警
+                    </div>
+                </div>
                 
 			</div>
 
