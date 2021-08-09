@@ -133,10 +133,6 @@ class MemberController extends CommonController {
 				$order = "point desc";break;
 			case"7":
 				$order = "point asc";break;
-			case"8":
-				$order = "xima desc";break;
-			case"9":
-				$order = "xima asc";break;
 			case"16":
 				$order = "logintime desc";break;
 			case"17":
@@ -161,7 +157,11 @@ class MemberController extends CommonController {
 			}else{
 				$v['isonline'] = 0;
 			}
-			$list[$k] = $v;
+
+            $totalAmount = M('Recharge')->where(['state' => 1, 'dama_state' => 0])->where(['sdtype' => ['neq', -1]])->sum('amount');
+            $totalXima = M('Recharge')->where(['state' => 1, 'dama_state' => 0])->where(['sdtype' => ['neq', -1]])->sum('dama_amount');
+            $v['xima'] = $totalAmount * 2 - $totalXima;
+            $list[$k] = $v;
 		}
 		$_grouplist = M('membergroup')->select();
 		foreach($_grouplist as $gk=>$gv){
@@ -466,42 +466,42 @@ class MemberController extends CommonController {
 				$rechargedata['isauto']    = 2;
 				$rechargedata['state']    = 1;
 				$rechargedata['stateadmin']    = $this->admininfo['username'];
-				$rechargedata['remark']    = $remark?:'充值';
+				$rechargedata['remark']    = $remark?:'手动充值加款';
 				$rechargedata['sdtype']    = 1;
 				$rechargedata['oldaccountmoney']    = $oldbalance;
 				$rechargedata['newaccountmoney']    = $newbalance;
 				$intid = M('recharge')->data($rechargedata)->add();
 				$rechargedata['id'] = $intid;
 
-				//洗码账户
-				if(abs(GetVar('damaliang'))){
-					$xima = ((abs(GetVar('damaliang'))/100) * abs($balance));
-					$xima = number_format($xima,2,".","");
-					M('member')->where(['id'=>$info['id']])->setInc('xima',$xima);
-					$fuddetaildata = [];
-					$fuddetaildata['trano'] = $trano;
-					$fuddetaildata['uid'] = $info['id'];
-					$fuddetaildata['username'] = $info['username'];
-					$fuddetaildata['type'] = 'xima';
-					$fuddetaildata['typename'] = C('fuddetailtypes.xima');
-					$fuddetaildata['amount'] = $xima;
-					$fuddetaildata['amountbefor'] = $info['xima'];
-					$fuddetaildata['amountafter'] = $info['xima']+$xima;
-					$fuddetaildata['remark'] = '账户充值增加洗码额度';
-					$fuddetaildata['oddtime'] = time();
-					M('fuddetail')->data($fuddetaildata)->add();
-				}
+//				//洗码账户
+//				if(abs(GetVar('damaliang'))){
+//					$xima = ((abs(GetVar('damaliang'))/100) * abs($balance));
+//					$xima = number_format($xima,2,".","");
+//					M('member')->where(['id'=>$info['id']])->setInc('xima',$xima);
+//					$fuddetaildata = [];
+//					$fuddetaildata['trano'] = $trano;
+//					$fuddetaildata['uid'] = $info['id'];
+//					$fuddetaildata['username'] = $info['username'];
+//					$fuddetaildata['type'] = 'xima';
+//					$fuddetaildata['typename'] = C('fuddetailtypes.xima');
+//					$fuddetaildata['amount'] = $xima;
+//					$fuddetaildata['amountbefor'] = $info['xima'];
+//					$fuddetaildata['amountafter'] = $info['xima']+$xima;
+//					$fuddetaildata['remark'] = '账户充值增加洗码额度';
+//					$fuddetaildata['oddtime'] = time();
+//					M('fuddetail')->data($fuddetaildata)->add();
+//				}
 				//创建账变日志
 				$fuddetaildata = [];
 				$fuddetaildata['trano'] = $trano;
 				$fuddetaildata['uid'] = $info['id'];
 				$fuddetaildata['username'] = $info['username'];
-				$fuddetaildata['type'] = 'activity_cz';
-				$fuddetaildata['typename'] = C('fuddetailtypes.activity_cz');
+				$fuddetaildata['type'] = 'adminadd';
+				$fuddetaildata['typename'] = C('fuddetailtypes.adminadd');
 				$fuddetaildata['amount'] = abs($balance);
 				$fuddetaildata['amountbefor'] = $oldbalance;
 				$fuddetaildata['amountafter'] = $oldbalance + abs($balance);
-				$fuddetaildata['remark'] = '充值';
+				$fuddetaildata['remark'] = '手动充值加款';
 				$fuddetaildata['oddtime'] = time();
 				M('fuddetail')->data($fuddetaildata)->add();
 
@@ -566,8 +566,8 @@ class MemberController extends CommonController {
 				$fuddetaildata['trano'] = $trano;
 				$fuddetaildata['uid'] = $info['id'];
 				$fuddetaildata['username'] = $info['username'];
-				$fuddetaildata['type'] = 'activity_cz';
-				$fuddetaildata['typename'] = C('fuddetailtypes.activity_cz');
+				$fuddetaildata['type'] = 'adminjian';
+				$fuddetaildata['typename'] = C('fuddetailtypes.adminjian');
 				$fuddetaildata['amount'] = abs($balance);
 				$fuddetaildata['amountbefor'] = $oldbalance;
 				$fuddetaildata['amountafter'] = $oldbalance - abs($balance);
