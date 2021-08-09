@@ -14,8 +14,6 @@
 <option value="{:U(CONTROLLER_NAME.'/'.ACTION_NAME,array_merge($_GET,['ordertype'=>5]))}" {if condition="$ordertype eq 5"}selected{/if}>账户金额低到高</option>
 <option value="{:U(CONTROLLER_NAME.'/'.ACTION_NAME,array_merge($_GET,['ordertype'=>6]))}" {if condition="$ordertype eq 6"}selected{/if}>账户积分高到低</option>
 <option value="{:U(CONTROLLER_NAME.'/'.ACTION_NAME,array_merge($_GET,['ordertype'=>7]))}" {if condition="$ordertype eq 7"}selected{/if}>账户积分低到高</option>
-<option value="{:U(CONTROLLER_NAME.'/'.ACTION_NAME,array_merge($_GET,['ordertype'=>8]))}" {if condition="$ordertype eq 8"}selected{/if}>洗码余额高到低</option>
-<option value="{:U(CONTROLLER_NAME.'/'.ACTION_NAME,array_merge($_GET,['ordertype'=>9]))}" {if condition="$ordertype eq 9"}selected{/if}>洗码余额低到高</option>
 <option value="{:U(CONTROLLER_NAME.'/'.ACTION_NAME,array_merge($_GET,['ordertype'=>16]))}" {if condition="$ordertype eq 16"}selected{/if}>登陆时间高到低</option>
 <option value="{:U(CONTROLLER_NAME.'/'.ACTION_NAME,array_merge($_GET,['ordertype'=>17]))}" {if condition="$ordertype eq 17"}selected{/if}>登陆时间低到高</option>
 <option value="{:U(CONTROLLER_NAME.'/'.ACTION_NAME,array_merge($_GET,['ordertype'=>18]))}" {if condition="$ordertype eq 18"}selected{/if}>在线时间高到低</option>
