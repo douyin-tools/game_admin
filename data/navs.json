@@ -227,6 +227,12 @@
         "href": "Member.memlog",
         "icon": "&#xe61c;",
         "spread": false
+      },
+      {
+        "title": "异常告警",
+        "href": "Index.warning",
+        "icon": "&#xe61c;",
+        "spread": false
       }
     ]
   },

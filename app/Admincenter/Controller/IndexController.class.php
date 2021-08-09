@@ -210,4 +210,50 @@ class IndexController extends CommonController {
 		echo json_encode(['sign'=>true,'message'=>'获取成功','czcount'=>$czcount?$czcount:0,'tkcount'=>$tkcount?$tkcount:0,'bankbindcount'=>$bankbindcount?$bankbindcount:0]);
 	}
 
+
+    /**
+     * 告警
+     */
+	public function warningAction()
+    {
+        $data = M('warning')->where(['state' => 0])->limit(0, 1)->order('id desc')->find();
+        if ($data) {
+            $this->ajaxReturn(['msg' => $data['content'], 'state' => 1]);
+        } else {
+            $this->ajaxReturn(['msg' => '', 'state' => 0]);
+        }
+    }
+
+    /*
+     * 告警
+     */
+    public function warning()
+    {
+        $db = M('Warning');
+        $_pagasize  = 10;
+        $count      = $db->count();
+        $Page       = new \Think\Page($count,$_pagasize);
+        $show       = $Page->show();
+        $list       = $db->limit($Page->firstRow.','.$Page->listRows)->order("id desc")->select();
+
+        $this->assign('totalcount',$count);
+        $this->assign('list',$list);
+        $this->assign('page',$show);
+        $this->display();
+    }
+
+    /**
+     * 阅读告警信息
+     */
+    public function warningRead()
+    {
+        $read_at = date('Y-m-d H:i:s');
+        $res = M('Warning')->where(['id' => I('id')])->data(['state' => 1, 'read_at' => $read_at])->save();
+        if ($res) {
+            $this->ajaxReturn(['msg' => 'success', 'read_at' => $read_at, 'state' => 1]);
+        } else {
+            $this->ajaxReturn(['msg' => '更新失败', 'read_at' => '', 'state' => 0]);
+        }
+    }
+
 }
