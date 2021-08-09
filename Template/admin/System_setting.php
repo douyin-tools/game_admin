@@ -383,24 +383,24 @@
                 
                 
                 
-				<div class="row cl">
-					<label class="form-label col-xs-4 col-sm-2">采集接口设置：</label>
-					<div class="formControls col-xs-8 col-sm-9">
-                        <input class="input-text" name="info[caijieapiurl]" placeholder="采集接口设置" value="{$setlist.caijieapiurl}" type="text"><br><small>修改5分钟内生效</small>
-                        
-                        
-					</div>
-				</div>
+<!--				<div class="row cl">-->
+<!--					<label class="form-label col-xs-4 col-sm-2">采集接口设置：</label>-->
+<!--					<div class="formControls col-xs-8 col-sm-9">-->
+<!--                        <input class="input-text" name="info[caijieapiurl]" placeholder="采集接口设置" value="{$setlist.caijieapiurl}" type="text"><br><small>修改5分钟内生效</small>-->
+<!--                        -->
+<!--                        -->
+<!--					</div>-->
+<!--				</div>-->
                 
-                
-				<div class="row cl">
-					<label class="form-label col-xs-4 col-sm-2">允许前台IP地址：</label>
-					<div class="formControls col-xs-8 col-sm-9">
-                        <textarea class="textarea" name="info[weballowips]">{$setlist.weballowips}</textarea><br><small>前台服务器IP地址，多个用(,)隔开</small>
-                        
-                        
-					</div>
-				</div>
+<!--                -->
+<!--				<div class="row cl">-->
+<!--					<label class="form-label col-xs-4 col-sm-2">允许前台IP地址：</label>-->
+<!--					<div class="formControls col-xs-8 col-sm-9">-->
+<!--                        <textarea class="textarea" name="info[weballowips]">{$setlist.weballowips}</textarea><br><small>前台服务器IP地址，多个用(,)隔开</small>-->
+<!--                        -->
+<!--                        -->
+<!--					</div>-->
+<!--				</div>-->
                 
                 <div class="row cl">
 					<label class="form-label col-xs-4 col-sm-2">后台提示音：</label>
@@ -431,11 +431,15 @@
 					<label class="form-label col-xs-4 col-sm-2">默认推荐码：</label>
 					<div class="formControls col-xs-8 col-sm-9">
                         <input type="text" name="info[defaulttjcode]" class="input-text" value="{$setlist.defaulttjcode}" style="width:80px;">会员注册页面提示(0 不提示)
-                        
-                        
 					</div>
 				</div>
-                
+
+                <div class="row cl">
+                    <label class="form-label col-xs-4 col-sm-2">首冲赠送金额比例：</label>
+                    <div class="formControls col-xs-8 col-sm-9">
+                        <input type="text" name="info[f_recharge_rate]" class="input-text" value="{$setlist.f_recharge_rate|0}" style="width:80px;">&nbsp;0为不赠送
+                    </div>
+                </div>
                 
 			</div>
 
