@@ -89,24 +89,24 @@ function userrechargepay($_orderinfo=array()){//充值处理
 	M('fuddetail')->data($fuddetaildata)->add();
 
 	//洗码账户
-	if(abs(GetVar('damaliang'))){
-		$xima = ((abs(GetVar('damaliang'))/100) * $orderinfo['amount']);
-		$xima = number_format($xima,2,".","");
-		M('member')->where(['id'=>$orderinfo['uid']])->setInc('xima',$xima);
-		$fuddetaildata = [];
-		$fuddetaildata['trano'] = $_trano;
-		$fuddetaildata['uid'] = $orderinfo['uid'];
-		$fuddetaildata['username'] = $orderinfo['username'];
-		$fuddetaildata['type'] = 'xima';
-		$fuddetaildata['typename'] = C('fuddetailtypes.xima');
-		$fuddetaildata['amount'] = $xima;
-		$fuddetaildata['amountbefor'] = $oldaccountxima;
-		$fuddetaildata['amountafter'] = $oldaccountxima+$xima;
-		$fuddetaildata['remark'] = '账户充值增加洗码额度';
-		$fuddetaildata['oddtime'] = $_t;
-
-		M('fuddetail')->data($fuddetaildata)->add();
-	}
+//	if(abs(GetVar('damaliang'))){
+//		$xima = ((abs(GetVar('damaliang'))/100) * $orderinfo['amount']);
+//		$xima = number_format($xima,2,".","");
+//		M('member')->where(['id'=>$orderinfo['uid']])->setInc('xima',$xima);
+//		$fuddetaildata = [];
+//		$fuddetaildata['trano'] = $_trano;
+//		$fuddetaildata['uid'] = $orderinfo['uid'];
+//		$fuddetaildata['username'] = $orderinfo['username'];
+//		$fuddetaildata['type'] = 'xima';
+//		$fuddetaildata['typename'] = C('fuddetailtypes.xima');
+//		$fuddetaildata['amount'] = $xima;
+//		$fuddetaildata['amountbefor'] = $oldaccountxima;
+//		$fuddetaildata['amountafter'] = $oldaccountxima+$xima;
+//		$fuddetaildata['remark'] = '账户充值增加洗码额度';
+//		$fuddetaildata['oddtime'] = $_t;
+//
+//		M('fuddetail')->data($fuddetaildata)->add();
+//	}
 	//积分账户
 	$pointchongzhi    = intval(GetVar('pointchongzhi'));
 	$pointchongzhiadd = intval(GetVar('pointchongzhiadd'));
@@ -157,43 +157,47 @@ function userrechargepay($_orderinfo=array()){//充值处理
 	}*/
 
 	//首次充值赠送活动
-	$Commissionlist = [];
-	$Commissionlist[] = ['CommissionBase'=>GetVar('newmemberrecharge1'),'zsmoney'=>GetVar('newmemberrechargeamount1')];
-	$Commissionlist[] = ['CommissionBase'=>GetVar('newmemberrecharge2'),'zsmoney'=>GetVar('newmemberrechargeamount2')];
-	$Commissionlist[] = ['CommissionBase'=>GetVar('newmemberrecharge3'),'zsmoney'=>GetVar('newmemberrechargeamount3')];
-	$Commissionlist[] = ['CommissionBase'=>GetVar('newmemberrecharge4'),'zsmoney'=>GetVar('newmemberrechargeamount4')];
-	$Commissionlist[] = ['CommissionBase'=>GetVar('newmemberrecharge5'),'zsmoney'=>GetVar('newmemberrechargeamount5')];
-	if(!$isfirstcz)foreach($Commissionlist as $kkk=>$Commisvo){
-		$Commissions  = [];
-		$Commissions  = explode('~',$Commisvo['CommissionBase']);
-		$Commissions  = array_map('intval',$Commissions);
-		$zsmoney      = abs(floatval($Commisvo['zsmoney']));
-			
-		if($Commissions[0] && $Commissions[1] && $orderinfo['amount']>=$Commissions[0] && $orderinfo['amount']<=$Commissions[1] && intval($zsmoney)>0){
-			//$sczsamount      = $orderinfo['amount'] * ($zsmoney/100);
-			$sczsamount      = $zsmoney;
-			$moneyinfo = M('member')->where(['id'=>$orderinfo['uid']])->find();
-			$oldaccountmoney = $moneyinfo['balance'];//首充赠送前的金额
-			$newaccountmoney = $moneyinfo['balance']+$sczsamount;//首充赠送后的金额
-			$_int0 = M('member')->where(['id'=>$orderinfo['uid']])->setInc('balance',$sczsamount);
-			$fuddetaildata = [];
-			$fuddetaildata['trano'] = $_trano;
-			$fuddetaildata['uid'] = $orderinfo['uid'];
-			$fuddetaildata['username'] = $orderinfo['username'];
-			$fuddetaildata['type'] = 'activity_cz';
-			$fuddetaildata['typename'] = C('fuddetailtypes.activity_cz');
-			$fuddetaildata['amount'] = $sczsamount;
-			$fuddetaildata['amountbefor'] = $oldaccountmoney;
-			$fuddetaildata['amountafter'] = $newaccountmoney;
-			$fuddetaildata['remark'] = '首充赠送';
-			$fuddetaildata['oddtime'] = $_t;
-			if($_int0){
-				M('fuddetail')->data($fuddetaildata)->add();
-			}
-			
-			break;//依次符合条件则退出循环
-		}
-	}
+//	$Commissionlist = [];
+//	$Commissionlist[] = ['CommissionBase'=>GetVar('newmemberrecharge1'),'zsmoney'=>GetVar('newmemberrechargeamount1')];
+//	$Commissionlist[] = ['CommissionBase'=>GetVar('newmemberrecharge2'),'zsmoney'=>GetVar('newmemberrechargeamount2')];
+//	$Commissionlist[] = ['CommissionBase'=>GetVar('newmemberrecharge3'),'zsmoney'=>GetVar('newmemberrechargeamount3')];
+//	$Commissionlist[] = ['CommissionBase'=>GetVar('newmemberrecharge4'),'zsmoney'=>GetVar('newmemberrechargeamount4')];
+//	$Commissionlist[] = ['CommissionBase'=>GetVar('newmemberrecharge5'),'zsmoney'=>GetVar('newmemberrechargeamount5')];
+    $fRate = M('setting')->where(['name' => 'f_recharge_rate'])->find();
+	if(!$isfirstcz && $fRate && $fRate['value'] > 0) {
+//	    foreach($Commissionlist as $kkk=>$Commisvo){
+//            $Commissions  = [];
+//            $Commissions  = explode('~',$Commisvo['CommissionBase']);
+//            $Commissions  = array_map('intval',$Commissions);
+//            $zsmoney      = abs(floatval($Commisvo['zsmoney']));
+//
+//            if($Commissions[0] && $Commissions[1] && $orderinfo['amount']>=$Commissions[0] && $orderinfo['amount']<=$Commissions[1] && intval($zsmoney)>0){
+                //$sczsamount      = $orderinfo['amount'] * ($zsmoney/100);
+//        $sczsamount      = $zsmoney;
+                $sczsamount      = round($orderinfo['amount'] * $fRate['value'], 2);
+                $moneyinfo = M('member')->where(['id'=>$orderinfo['uid']])->find();
+                $oldaccountmoney = $moneyinfo['balance'];//首充赠送前的金额
+                $newaccountmoney = $moneyinfo['balance']+$sczsamount;//首充赠送后的金额
+                $_int0 = M('member')->where(['id'=>$orderinfo['uid']])->setInc('balance',$sczsamount);
+                $fuddetaildata = [];
+                $fuddetaildata['trano'] = $_trano;
+                $fuddetaildata['uid'] = $orderinfo['uid'];
+                $fuddetaildata['username'] = $orderinfo['username'];
+                $fuddetaildata['type'] = 'activity_cz';
+                $fuddetaildata['typename'] = C('fuddetailtypes.activity_cz');
+                $fuddetaildata['amount'] = $sczsamount;
+                $fuddetaildata['amountbefor'] = $oldaccountmoney;
+                $fuddetaildata['amountafter'] = $newaccountmoney;
+                $fuddetaildata['remark'] = '首充赠送';
+                $fuddetaildata['oddtime'] = $_t;
+                if($_int0){
+                    M('fuddetail')->data($fuddetaildata)->add();
+                }
+
+//                break;//依次符合条件则退出循环
+//            }
+//        }
+    }
 	
 	//单次充值赠送
 	$Commissionlist = [];
