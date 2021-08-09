@@ -107,7 +107,8 @@
                 <td><u style="cursor:pointer" class="text-primary" layer-url="{:U('balance',['id'=>$vo['id']])}" title="修改-{$vo.username}金额">{$vo.balance}</u></td>
                 <td><u style="cursor:pointer" class="text-primary" layer-url="{:U('point',['id'=>$vo['id']])}" title="修改-{$vo.username}积分">{$vo.point}</u></td>
 				<td>{$vo.fandian}%</td>
-                <td><u style="cursor:pointer" class="text-primary" layer-url="{:U('xima',['id'=>$vo['id']])}" title="修改-{$vo.username}洗码余额">{$vo.xima}</u></td>
+<!--                <td><u style="cursor:pointer" class="text-primary" layer-url="{:U('xima',['id'=>$vo['id']])}" title="修改-{$vo.username}洗码余额">{$vo.xima}</u></td>-->
+                <td>{$vo.xima}</td>
                 <td><u style="cursor:pointer" class="text-primary" layer-url="{:U('recharge',['uid'=>$vo['id']])}" title="{$vo.username}的充值记录">总充值</u></td>
                 <td><u style="cursor:pointer" class="text-primary" layer-url="{:U('withdraw',['uid'=>$vo['id']])}" title="{$vo.username}的充值记录">总提款</u></td>
                 <td><u style="cursor:pointer" class="text-primary" layer-url="{:U('Tongji/user',['username'=>$vo['username']])}" title="{$vo.username}的游戏统计">总输赢</u></td>
