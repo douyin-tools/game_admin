@@ -158,8 +158,8 @@ class MemberController extends CommonController {
 				$v['isonline'] = 0;
 			}
 
-            $totalAmount = M('Recharge')->where(['state' => 1, 'dama_state' => 0])->where(['sdtype' => ['neq', -1]])->sum('amount');
-            $totalXima = M('Recharge')->where(['state' => 1, 'dama_state' => 0])->where(['sdtype' => ['neq', -1]])->sum('dama_amount');
+            $totalAmount = M('Recharge')->where(['uid' => $v['id'], 'state' => 1, 'dama_state' => 0])->where(['sdtype' => ['neq', -1]])->sum('amount');
+            $totalXima = M('Recharge')->where(['uid' => $v['id'], 'state' => 1, 'dama_state' => 0])->where(['sdtype' => ['neq', -1]])->sum('dama_amount');
             $v['xima'] = $totalAmount * 2 - $totalXima;
             $list[$k] = $v;
 		}
