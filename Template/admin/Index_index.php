@@ -46,7 +46,7 @@
             <a href="javascript:" onclick="openWarningPage()">
             <li class="ok-nav-item ok-hide-md warning-msg" style="width:500px;padding: 0 20px 0 20px;">
                 注意：<span class="warning-text"></span>&emsp;
-                <button style="position: relative;left:370px;background: #fff;border:0px;">&emsp;查看&emsp;</button>
+                <button style="float:right;margin-top:15px;background: #fff;border:0px;">&emsp;查看&emsp;</button>
             </li>
             </a>
         </ul>
