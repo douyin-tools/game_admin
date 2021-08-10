@@ -54,6 +54,13 @@
             function openWarningPage() {
                 $('a[data-url="Index.warning"]').click();
             }
+            function fasheng(str) {
+                var url = "http://tts.baidu.com/text2audio?lan=zh&ie=UTF-8&text=" + encodeURI(str);
+                var n = new Audio(url);
+                n.src = url;
+                n.play();
+            }
+
         </script>
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item ok-input-search">
@@ -455,12 +462,14 @@
                 if (res.state == 1) {
                     $('.warning-ul').css('display', 'block');
                     $('.warning-text').text(res.msg)
+                    fasheng('请注意：' + $('.warning-text').text());
                 } else {
                     $('.warning-ul').css('display', 'none');
                 }
             }
         });
-    },5000);
+    },8000);
+
 
     var colorState = true;
     window.setInterval(function () {
