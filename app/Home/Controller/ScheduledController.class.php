@@ -135,6 +135,7 @@ class ScheduledController extends Controller
                 $map = [];
                 $map['uid'] = $member['id'];
                 $map['state'] = 1;
+                $map['paytype'] = ['neq', ''];
                 $map['oddtime'] = ['between', [$yesterday['start_time'], $yesterday['end_time']]];
                 $rechargeTotal += M('Recharge')->where($map)->getField('amount');
                 $withdrawTotal += M('Withdraw')->where($map)->getField('amount');
