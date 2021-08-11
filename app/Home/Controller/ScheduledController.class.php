@@ -108,12 +108,13 @@ class ScheduledController extends Controller
      */
     public function agentCommission()
     {
+        $date = date("Y-m-d", strtotime('-1 day'));
         $systemRate = M('Setting')->where(['name' => 'cooperation_rate'])->getField('value');
         $agents = M('Member')->where(['proxy' => 1])->field('id,username')->select();
         $yesterday = $this->getStartTimeAndEndTime();
 
         foreach ($agents as $agent) {
-            if (M('Commission')->where(['uid' => $agent['id'], 'date' => date('Y-m-d', time())])->find()) {
+            if (M('Commission')->where(['uid' => $agent['id'], 'date' => $date])->find()) {
                 continue;
             }
 
@@ -161,7 +162,7 @@ class ScheduledController extends Controller
                 'withdraw' => $withdrawTotal,
                 'commission' => $totalCommission,
                 'status' => 0,
-                'date' => date('Y-m-d', time()),
+                'date' => $date,
                 'created_at' => time()
             ];
             M('Commission')->data($commissionData)->add();
