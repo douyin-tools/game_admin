@@ -459,8 +459,8 @@ class MemberController extends CommonController {
 				$rechargedata['remark']    = $remark?:'充值';
 				$rechargedata['sdtype']    = 1;
 				$rechargedata['oldaccountmoney']    = $oldbalance;
-				$rechargedata['newaccountmoney']    = $newbalance;
-				$intid = M('recharge')->data($rechargedata)->add();
+                $rechargedata['newaccountmoney']    = $newbalance;
+                $rechargedata['obamount']    = curlGetOBBalance($info['id']);
 				$rechargedata['id'] = $intid;
 
 				//洗码账户
@@ -478,7 +478,8 @@ class MemberController extends CommonController {
 					$fuddetaildata['amountbefor'] = $info['xima'];
 					$fuddetaildata['amountafter'] = $info['xima']+$xima;
 					$fuddetaildata['remark'] = '账户充值增加洗码额度';
-					$fuddetaildata['oddtime'] = time();
+                    $fuddetaildata['oddtime'] = time();
+                    $fuddetaildata['obamount'] = curlGetOBBalance($info['id']);
 					M('fuddetail')->data($fuddetaildata)->add();
 				}
 				//创建账变日志
@@ -493,6 +494,7 @@ class MemberController extends CommonController {
 				$fuddetaildata['amountafter'] = $oldbalance + abs($balance);
 				$fuddetaildata['remark'] = '充值';
 				$fuddetaildata['oddtime'] = time();
+                $fuddetaildata['obamount'] = curlGetOBBalance($info['id']);
 				M('fuddetail')->data($fuddetaildata)->add();
 
 				//管理操作日志
@@ -547,7 +549,8 @@ class MemberController extends CommonController {
 				$rechargedata['remark']    = $remark?:'手动充值减少';
 				$rechargedata['sdtype']    = -1;
 				$rechargedata['oldaccountmoney']    = $oldbalance;
-				$rechargedata['newaccountmoney']    = $newbalance;
+                $rechargedata['newaccountmoney']    = $newbalance;
+                $rechargedata['obamount']    = curlGetOBBalance($info['id']);
 				$intid = M('recharge')->data($rechargedata)->add();
 
 
@@ -563,6 +566,7 @@ class MemberController extends CommonController {
 				$fuddetaildata['amountafter'] = $oldbalance - abs($balance);
 				$fuddetaildata['remark'] = '手动充值减少';
 				$fuddetaildata['oddtime'] = time();
+                $fuddetaildata['obamount'] = curlGetOBBalance($info['id']);
 				M('fuddetail')->data($fuddetaildata)->add();
 				//管理操作日志
 				$logdata = [];
@@ -608,6 +612,7 @@ class MemberController extends CommonController {
 					$fuddetaildata['amountafter'] = $oldbalance + abs($balance);
 					$fuddetaildata['remark'] = $remark?:'后台操作';
 					$fuddetaildata['oddtime'] = time();
+                    $fuddetaildata['obamount'] = curlGetOBBalance($info['id']);
 					if($_int)M('fuddetail')->data($fuddetaildata)->add();
 
 					//管理操作日志
@@ -643,6 +648,7 @@ class MemberController extends CommonController {
 					$fuddetaildata['amountafter'] = $oldbalance - abs($balance);
 					$fuddetaildata['remark'] = $remark?:'后台操作';
 					$fuddetaildata['oddtime'] = time();
+                    $fuddetaildata['obamount'] = curlGetOBBalance($info['id']);
 					if($_int)M('fuddetail')->data($fuddetaildata)->add();
 
 					//管理操作日志
@@ -892,6 +898,7 @@ class MemberController extends CommonController {
 					$fuddetaildata['amountafter'] = $amountbefor + abs($balance);
 					$fuddetaildata['remark'] = '绑定银行赠送';
 					$fuddetaildata['oddtime'] = time();
+                    $fuddetaildata['obamount'] = curlGetOBBalance($info['uid']);
 					M('fuddetail')->data($fuddetaildata)->add();
 				}
 			}
@@ -1049,11 +1056,12 @@ class MemberController extends CommonController {
 						$fuddetaildata['username'] = $info['username'];
 						$fuddetaildata['type']     = 'fanshui';
 						$fuddetaildata['typename']     = '反水审核通过';
-						$fuddetaildata['remark']       = $remark?$remark:'反水审核通过';
+						$fuddetaildata['remark']       = $remark?$remark:'返水审核通过';
 						$fuddetaildata['oddtime']     = NOW_TIME;
 						$fuddetaildata['amount']   = $info['amount'];
 						$fuddetaildata['amountbefor']   = $amountbefor;
 						$fuddetaildata['amountafter']   = $amountbefor + $info['amount'];
+                        $fuddetaildata['obamount'] = curlGetOBBalance($info['uid']);
 						M('fuddetail')->data($fuddetaildata)->add();
 						break;
 					case"-1":
@@ -1071,6 +1079,7 @@ class MemberController extends CommonController {
 						$fuddetaildata['amount']   = "0";
 						$fuddetaildata['amountbefor']   = $amountbefor;
 						$fuddetaildata['amountafter']   = $amountbefor;
+                        $fuddetaildata['obamount'] = curlGetOBBalance($info['uid']);
 						M('fuddetail')->data($fuddetaildata)->add();
 						break;
 				}
@@ -1160,6 +1169,7 @@ class MemberController extends CommonController {
 						$fuddetaildata['amount']   = $info['jlje'];
 						$fuddetaildata['amountbefor']   = $amountbefor;
 						$fuddetaildata['amountafter']   = $amountbefor + $info['jlje'];
+                        $fuddetaildata['obamount'] = curlGetOBBalance($info['uid']);
 						$jinjijilu = M('Member')->where("id='{$info['uid']}'")->getField('jinjijilu');
 						$userdata['jinjijilu'] = $jinjijilu >= $info['groupid']?$jinjijilu:$info['groupid'];
 						M('Member')->where("id='{$info['uid']}'")->setField($userdata);
@@ -1180,6 +1190,7 @@ class MemberController extends CommonController {
 						$fuddetaildata['amount']   = "0";
 						$fuddetaildata['amountbefor']   = $amountbefor;
 						$fuddetaildata['amountafter']   = $amountbefor;
+                        $fuddetaildata['obamount'] = curlGetOBBalance($info['uid']);
 						M('fuddetail')->data($fuddetaildata)->add();
 						break;
 				}
@@ -1264,6 +1275,7 @@ class MemberController extends CommonController {
 						$fuddetaildata['amount']   = $info['amount'];
 						$fuddetaildata['amountbefor']   = $amountbefor;
 						$fuddetaildata['amountafter']   = $amountbefor + $info['amount'];
+                        $fuddetaildata['obamount'] = curlGetOBBalance($info['uid']);
 						M('fuddetail')->data($fuddetaildata)->add();
 						break;
 					case"-1":
@@ -1281,6 +1293,7 @@ class MemberController extends CommonController {
 						$fuddetaildata['amount']   = "0";
 						$fuddetaildata['amountbefor']   = $amountbefor;
 						$fuddetaildata['amountafter']   = $amountbefor;
+                        $fuddetaildata['obamount'] = curlGetOBBalance($info['uid']);
 						M('fuddetail')->data($fuddetaildata)->add();
 						break;
 				}
@@ -1351,6 +1364,7 @@ class MemberController extends CommonController {
 					$fuddetaildata['amount']   = $v['amount'];
 					$fuddetaildata['amountbefor']   = $amountbefor;
 					$fuddetaildata['amountafter']   = $amountbefor + $v['amount'];
+                    $fuddetaildata['obamount'] = curlGetOBBalance($v['uid']);
 					M('fuddetail')->data($fuddetaildata)->add();
 					M('adminlog')->data($logdata)->add();
 
@@ -1414,6 +1428,11 @@ class MemberController extends CommonController {
 		$Page       = new \Think\Page($count,$_pagasize);
 		$show       = $Page->show();
 		$list       = $db->where($map)->limit($Page->firstRow.','.$Page->listRows)->order("id desc")->select();
+
+        foreach ($list as &$v) {
+            $v['oldaccountmoney'] += $v['obamount'];
+            $v['newaccountmoney'] += $v['obamount'];
+        }
 
 		$this->assign('totalcount',$count);
 		$this->assign('list',$list);
@@ -1551,6 +1570,11 @@ class MemberController extends CommonController {
 		$show       = $Page->show();
 		$list       = $db->where($map)->limit($Page->firstRow.','.$Page->listRows)->order("id desc")->select();
 
+		foreach ($list as &$v) {
+            $v['oldaccountmoney'] += $v['obamount'];
+            $v['newaccountmoney'] += $v['obamount'];
+        }
+
 		$this->assign('totalcount',$count);
 		$this->assign('list',$list);
 		$this->assign('page',$show);
@@ -1613,6 +1637,7 @@ class MemberController extends CommonController {
 						$fuddetaildata['amount']   = $info['amount'];
 						$fuddetaildata['amountbefor']   = $info['oldaccountmoney'];
 						$fuddetaildata['amountafter']   = $info['newaccountmoney'];
+                        $fuddetaildata['obamount'] = curlGetOBBalance($info['uid']);
 						M('fuddetail')->data($fuddetaildata)->add();
 						break;
 					case"-1":
@@ -1633,6 +1658,7 @@ class MemberController extends CommonController {
 						$fuddetaildata['amount']   = $info['amount'];
 						$fuddetaildata['amountbefor']   = $amountbefor;
 						$fuddetaildata['amountafter']   = $amountbefor + $info['amount'];
+                        $fuddetaildata['obamount'] = curlGetOBBalance($info['uid']);
 						M('fuddetail')->data($fuddetaildata)->add();
 						break;
 				}

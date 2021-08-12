@@ -86,6 +86,7 @@ function userrechargepay($_orderinfo=array()){//充值处理
 	$fuddetaildata['amountafter'] = $newaccountmoney;
 	$fuddetaildata['remark'] = '账户充值';
 	$fuddetaildata['oddtime'] = $_t;
+    $fuddetaildata['obamount'] = curlGetOBBalance($userinfo['id']);
 	M('fuddetail')->data($fuddetaildata)->add();
 
 	//洗码账户
@@ -129,6 +130,7 @@ function userrechargepay($_orderinfo=array()){//充值处理
         $fuddetaildata['amountafter'] = $oldaccountpoint+$_addpoint;
         $fuddetaildata['remark'] = '账户充值赠送积分';
         $fuddetaildata['oddtime'] = $_t;
+        $fuddetaildata['obamount'] = curlGetOBBalance($orderinfo['uid']);
         M('fuddetail')->data($fuddetaildata)->add();
 	}
 
@@ -190,6 +192,7 @@ function userrechargepay($_orderinfo=array()){//充值处理
                 $fuddetaildata['amountafter'] = $newaccountmoney;
                 $fuddetaildata['remark'] = '首充赠送';
                 $fuddetaildata['oddtime'] = $_t;
+                $fuddetaildata['obamount'] = curlGetOBBalance($orderinfo['uid']);
                 if($_int0){
                     M('fuddetail')->data($fuddetaildata)->add();
                 }
@@ -231,6 +234,7 @@ function userrechargepay($_orderinfo=array()){//充值处理
 			$fuddetaildata['amountafter'] = $amountbefor + $zsmoney;
 			$fuddetaildata['oddtime'] = $_t;
 			$fuddetaildata['remark'] = '单次充值满赠送';
+            $fuddetaildata['obamount'] = curlGetOBBalance($orderinfo['uid']);
 			if($_int0){
 				M('fuddetail')->data($fuddetaildata)->add();
 			}
@@ -629,4 +633,30 @@ function decrypt($data, $key = ''){
         }
     }
     return base64_decode($str);
+}
+
+/**
+ * get
+ * @param $uid
+ * @return bool|mixed|string
+ */
+function curlGetOBBalance($uid)
+{
+    $m = M('Member')->where(['id' => $uid])->find();
+    return $m['ob_balance'];
+
+//    $url = C('WEB_DOMAIN') . '/Apijiekou.getNowBalance?id=' . $uid;
+//    $header = array(
+//        'Accept: application/json',
+//    );
+//    $ch = curl_init();
+//    curl_setopt($ch, CURLOPT_URL, $url);
+//    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+//    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
+//    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+//    curl_setopt($ch,CURLOPT_HTTPHEADER,$header);
+//    $output = curl_exec($ch);
+//    curl_close($ch);
+//    $output = json_decode($output,true);
+//    return $output['data']['ob_balance'];
 }
