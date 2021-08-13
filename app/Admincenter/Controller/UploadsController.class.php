@@ -21,12 +21,7 @@ class UploadsController extends CommonController {
 		$upload = new \Think\Upload();// 实例化上传类
 		$upload->maxSize   =     $size*1024*1024 ;// 设置附件上传大小
 		$upload->exts      =     $allowext;// 设置附件上传类型
-		if($allowpath){
-			$upload->rootPath  =     './Uploads/'; // 临时目录
-		}else{
-			$upload->rootPath  =     RUNTIME_PATH.'Uploads/'; // 临时目录
-		}
-		$upload->rootPath  =     '../web/Uploads/';
+		$upload->rootPath  =     UPLOAD_PATH;
 		$upload->savePath  =     ''; // 设置附件上传（子）目录
 		if(!is_dir($upload->rootPath))mkdir($upload->rootPath,0755,true);
 		// 上传文件 
@@ -36,7 +31,7 @@ class UploadsController extends CommonController {
 				exit;
 		}else{
 				//$file_url=trim($upload->rootPath.$info["imgFile"]['savepath'].$info["imgFile"]['savename'],'.');
-				$file_url="/Uploads/".$info["imgFile"]['savepath'].$info["imgFile"]['savename'];
+				$file_url="/client/".$info["imgFile"]['savepath'].$info["imgFile"]['savename'];
 				echo json_encode(array('error' => 0, 'url' => $file_url,'id'=>'list_'.rand(0,9999)));
 				exit;
 		}

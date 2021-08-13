@@ -133,17 +133,29 @@
 
     {if condition="$info['paytype'] eq 'usdt'"}
 	<div class="row cl">
-		<label class="form-label col-xs-4 col-sm-3">TRC20二维码：</label>
+		<label class="form-label col-xs-4 col-sm-3">TRC-20二维码：</label>
 		<div class="formControls col-xs-8 col-sm-9">
 			<input type="text" class="input-text" value="{$configs.trc20_ewmurl}" placeholder="TRC20二维码" name="configs[trc20_ewmurl]" id="trc20_ewmurl">
 			<input id="btn_trc20_ewmurl"  class="btn btn-default uk-button" type="button" value="选择文件">
 		</div>
 	</div>
     <div class="row cl">
-        <label class="form-label col-xs-4 col-sm-3">ERC20二维码：</label>
+        <label class="form-label col-xs-4 col-sm-3">TRC-20地址：</label>
+        <div class="formControls col-xs-8 col-sm-9">
+            <input type="text" class="input-text" value="{$configs.trc20_adder}" placeholder="TRC-20地址" name="configs[trc20_adder]" id="trc20_adder">
+        </div>
+    </div>
+    <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-3">ERC-20二维码：</label>
         <div class="formControls col-xs-8 col-sm-9">
             <input type="text" class="input-text" value="{$configs.erc20_ewmurl}" placeholder="ERC20二维码" name="configs[erc20_ewmurl]" id="erc20_ewmurl">
             <input id="btn_erc20_ewmurl"  class="btn btn-default uk-button" type="button" value="选择文件">
+        </div>
+    </div>
+    <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-3">ERC-20地址：</label>
+        <div class="formControls col-xs-8 col-sm-9">
+            <input type="text" class="input-text" value="{$configs.erc20_adder}" placeholder="ERC-20地址" name="configs[erc20_adder]" id="erc20_adder">
         </div>
     </div>
     {else /}
