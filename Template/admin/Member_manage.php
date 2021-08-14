@@ -78,7 +78,7 @@
 				<th width="60">上线</th>
 				<th width="60">类型</th>
 				<th width="60">晋级记录</th>
-				<th width="60">金额</th>
+				<th width="60">账户余额</th>
 				<th width="60">积分</th>
 				<th width="60">返点</th>
 				<th width="75">洗码余额</th>
