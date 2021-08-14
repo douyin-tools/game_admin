@@ -25,11 +25,11 @@
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>类型：</label>
 			<div class="formControls col-xs-8 col-sm-9 skin-minimal">
 				<div class="radio-box">
-					<input name="proxy" type="radio" id="proxy-1" value="1" {if condition="$info['proxy'] eq 1"}checked{/if}>
+					<input name="proxy" type="radio" onclick="isProxy(1)" id="proxy-1" value="1" {if condition="$info['proxy'] eq 1"}checked{/if}>
 					<label for="proxy-1">代理</label>
 				</div>
 				<div class="radio-box">
-					<input type="radio" id="proxy-0" name="proxy" value="0" {if condition="$info['proxy'] eq 0"}checked{/if}>
+					<input type="radio" id="proxy-0" onclick="isProxy(0)" name="proxy" value="0" {if condition="$info['proxy'] eq 0"}checked{/if}>
 					<label for="proxy-0">会员</label>
 				</div>
 			</div>
@@ -144,7 +144,7 @@
                 <input type="hidden" readonly="true" class="input-text" value="{$info.agent_code}" placeholder="推广码" name="agent_code">
             </div>
         </div>
-        <div class="row cl">
+        <div class="row cl share_rate" style="display: <?php echo $info['proxy'] == 1 ? 'block' : 'none';  ?>">
             <label class="form-label col-xs-4 col-sm-3"><span class="c-red"></span>合营比例：</label>
             <div class="formControls col-xs-8 col-sm-9">
                 <input type="number" class="input-number" value="{$info.share_rate}" placeholder="为0则默认启用系统通用设置,取值范围0~99" name="share_rate">% (为0则默认启用系统通用设置,取值范围0~99)
@@ -160,6 +160,14 @@
 </article>
 
 {include file="Public/footer" /}
-
+<script>
+    function isProxy(value) {
+        if (value == 0) {
+            $('.share_rate').hide()
+        } else {
+            $('.share_rate').show()
+        }
+    }
+</script>
 </body>
 </html>
