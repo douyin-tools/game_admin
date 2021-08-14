@@ -1,5 +1,5 @@
 ﻿{include file="Public/meta" /}
-<title>会员管理</title>
+<title>管理员列表</title>
 </head>
 <body>
 <nav class="breadcrumb">
@@ -21,7 +21,7 @@
 			{volist name="list" id="vo"}
             <tr class="text-c">
                 <td>{$grouplist[$vo['groupid']]['groupname']}</td>
-                <td><u style="cursor:pointer" class="text-primary" layer-url="{:U('edit',['id'=>$vo['id']])}" title="编辑-{$vo.username}">{$vo.username}</u></td>
+                <td>{$vo.username}</td>
 				<td class="td-manage">
                 <u style="cursor:pointer" class="text-primary" layer-url="{:U('edit',['id'=>$vo['id']])}" title="编辑-{$vo.username}">修改</u> | <u style="cursor:pointer" class="text-primary {if condition='$vo[islock] eq 0'}c-999{elseif condition='$vo[islock] eq 1' /}c-green{/if}" lock-url="{:U('lock',['id'=>$vo['id']])}" title="锁定/解锁-{$vo.username}">{if condition="$vo['islock'] eq 0"}锁定{elseif condition="$vo['islock'] eq 1" /}解锁{/if}</u>
                 |
