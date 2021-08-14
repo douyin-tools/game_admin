@@ -80,7 +80,7 @@
 				<th width="60">晋级记录</th>
 				<th width="60">账户余额</th>
 				<th width="60">积分</th>
-				<th width="60">返点</th>
+<!--				<th width="60">返点</th>-->
 				<th width="75">洗码余额</th>
 				<th width="70">总充值</th>
 				<th width="70">总提款</th>
@@ -106,7 +106,7 @@
 				<td>VIP{$vo.jinjijilu}</td>
                 <td><u style="cursor:pointer" class="text-primary" layer-url="{:U('balance',['id'=>$vo['id']])}" title="修改-{$vo.username}金额">{$vo.balance}</u></td>
                 <td><u style="cursor:pointer" class="text-primary" layer-url="{:U('point',['id'=>$vo['id']])}" title="修改-{$vo.username}积分">{$vo.point}</u></td>
-				<td>{$vo.fandian}%</td>
+<!--				<td>{$vo.fandian}%</td>-->
 <!--                <td><u style="cursor:pointer" class="text-primary" layer-url="{:U('xima',['id'=>$vo['id']])}" title="修改-{$vo.username}洗码余额">{$vo.xima}</u></td>-->
                 <td>{$vo.xima}</td>
                 <td><u style="cursor:pointer" class="text-primary" layer-url="{:U('recharge',['uid'=>$vo['id']])}" title="{$vo.username}的充值记录">总充值</u></td>
